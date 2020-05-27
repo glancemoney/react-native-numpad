@@ -88,14 +88,13 @@ Sometimes React Native's built-in [<KeyboardAvoidingView>](https://reactnative.d
 
 The `<Input>` component automatically looks for the peer dependency `@expo/vector-icons` or `react-native-vector-icons` (in that order) to render icons (such as the backspace and hide icons). If neither icon library is installed, the library will log a warning and the icons will be missing.
 
-## To Do
+## Contribute
 
-- Split components into separate files in a /lib directory
-- Update icons
-- Add documentation
-- Create an Expo Snack from this repo
+We welcome contributions! If you are interested in contributing, consider helping us with one of the following tasks:
+
+- Rewrite components in TypeScript using arrow-function components and [React hooks](https://reactjs.org/docs/hooks-intro.html)
 - Add TypeScript bindings
-- Add tests
+- Add Tests
 
 ## Glance Money
 
