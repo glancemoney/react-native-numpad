@@ -20,7 +20,6 @@
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "~8.1.0"
   },
-  "private": true,
   "peerDependencies": {
     "@expo/vector-icons": "^10.2.0",
     "react-native-vector-icons": "^6.6.0"
