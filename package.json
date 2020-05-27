@@ -1,5 +1,5 @@
 {
-  "name": "@glance-money/number-pad",
+  "name": "react-native-number-pad",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   },
   "private": true,
   "peerDependencies": {
-    "@expo/vector-icons": "^10.2.0"
+    "@expo/vector-icons": "^10.2.0",
+    "react-native-vector-icons": "^6.6.0"
   }
 }
