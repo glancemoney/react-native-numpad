@@ -2,6 +2,12 @@
 
 A simple React Native number pad for quickly updating multiple number inputs.
 
+<br />✅ **No Dependencies**
+<br />✅ iOS
+<br />✅ Android
+<br />✅ React Native Web
+<br />✅ JS-Only (No Native Code / No Linking Necessary)
+
 ![Screen Recording](screen-recording.gif)
 
 ## Demo 👉 <a href="https://snack.expo.io/@git/github.com/glancemoney/react-native-number-pad" target="_blank">Expo Snack</a>
