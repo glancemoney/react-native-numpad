@@ -1,5 +1,5 @@
-node_modules/**/*
-.expo/*
+node_modules
+.expo
 npm-debug.*
 *.jks
 *.p8
@@ -9,6 +9,5 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-
-# macOS
+yarn-error.log
 .DS_Store

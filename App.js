@@ -1,19 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import NumberPad, { Input, Display } from './index';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <NumberPad>
+        <SafeAreaView>
+          {[0, 1, 2].map((i) => (
+            <Display key={i} cursor value={101} />
+          ))}
+        </SafeAreaView>
+        <Input
+          backspaceIcon={<Ionicons name="ios-backspace" {...Input.iconStyle} />}
+          hideIcon={<Ionicons name="ios-arrow-down" {...Input.iconStyle} />}
+        />
+      </NumberPad>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -1,26 +1,18 @@
 {
   "expo": {
-    "name": "demo",
-    "slug": "demo",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "name": "react-native-number-pad",
+    "slug": "react-native-number-pad",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
