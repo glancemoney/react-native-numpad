@@ -1,13 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, View, Text, Animated } from 'react-native';
+import { TouchableOpacity, View, Text, Animated, ViewStyle, StyleProp } from 'react-native';
 
 import NumberPadContext from './NumberPadContext';
 import styles from './styles';
 
 const inputs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'];
 
-export default class Input extends Component {
+type InputProps = {
+  height: number,
+  position: 'relative'|'absolute',
+  style?: StyleProp<ViewStyle>,
+  backspaceIcon?: JSX.Element,
+  hideIcon?: JSX.Element,
+  onWillHide?: ()=>void,
+  onDidHide?: ()=>void,
+  onWillShow?: ()=>void,
+  onDidShow?: ()=>void,
+}
+
+type MaybeAnimated<T> = T | Animated.Value;
+type AnimatedScalar = string | number;
+type AnimatedStyles<T> = {
+  [Key in keyof T]: T[Key] extends AnimatedScalar
+    ? MaybeAnimated<T[Key]>
+    : T[Key] extends Array<infer U>
+    ? Array<AnimatedStyles<U>>
+    : AnimatedStyles<T[Key]>
+};
+
+
+export default class Input extends Component<InputProps> {
+  animation: Animated.Value;
+
   static contextType = NumberPadContext;
 
   static propTypes = {
@@ -92,7 +117,7 @@ export default class Input extends Component {
 
   render() {
     return (
-      <Animated.View style={[this.getStyle(), this.props.style]}>
+      <Animated.View style={[this.getStyle() as any, this.props.style]}>
         <View style={styles.input}>
           <View style={styles.pad}>
             {inputs.map((value, index) => {
