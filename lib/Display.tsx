@@ -10,9 +10,9 @@ const parse = (str: string) => {
 };
 
 const format = (str: string, initial?: boolean, integerPlaces: number = 9, decimalPoints: number = 2, minimumDecimalPoints: number = 2) => {
-  let decimal : boolean;
+  let decimal: boolean;
   let [whole = '', part = ''] = str.split('.');
-  if(initial) {
+  if (initial) {
     decimal = (str !== '0' && (minimumDecimalPoints > 0 || part.length > 0)) ? true : false;
   }
   else {
@@ -114,7 +114,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     const formatter = props.format ? props.format : format;
 
     const value = formatter(String(this.props.value), true, props.integerPlaces, props.decimalPlaces, props.minimumDecimalPlaces);
-    
+
     this.state = {
       valid: true,
       active: false,
@@ -144,11 +144,15 @@ export default class Display extends Component<DisplayProps, DisplayState> {
 
   focus = (propagate: any = true) => {
     if (propagate) this.context.focus(this);
-    this.setState({
-      active: true,
-      lastValue: this.format(this.state.value, true),
-      value: '0',
-    });
+    if (!this.state.active) { 
+      // Explicitly check if was active because 
+      // otherwise if tapped again while focussed, value will be reset
+      this.setState({
+        active: true,
+        lastValue: this.format(this.state.value, true),
+        value: '0',
+      });
+    }
     if (this.props.cursor) {
       if (this.blink) clearInterval(this.blink);
       this.blink = setInterval(() => {
