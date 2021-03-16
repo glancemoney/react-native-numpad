@@ -9,16 +9,22 @@ const parse = (str: string) => {
   return parseFloat(str.replace(/,/g, ''));
 };
 
-const format = (str: string, initial?: boolean) => {
-  let decimal = str.includes('.');
+const format = (str: string, initial?: boolean, integerPlaces: number = 9, decimalPoints: number = 2, minimumDecimalPoints: number = 2) => {
+  let decimal : boolean;
   let [whole = '', part = ''] = str.split('.');
-  decimal = initial && str !== '0' ? true : decimal;
-  whole = whole.replace(/,/g, '').substring(0, 9);
+  if(initial) {
+    decimal = (str !== '0' && (minimumDecimalPoints > 0 || part.length > 0)) ? true : false;
+  }
+  else {
+    decimal = str.includes('.');
+  }
+  whole = whole.replace(/,/g, '').substring(0, integerPlaces);
   whole = whole ? parseInt(whole).toLocaleString('en-US') : '0';
-  part = part.substring(0, 2);
-  part = initial && decimal ? part.padEnd(2, '0') : part;
+  part = part.substring(0, decimalPoints);
+  part = initial && decimal ? part.padEnd(minimumDecimalPoints, '0') : part;
   return `${whole}${decimal ? '.' : ''}${part}`;
 };
+
 
 
 type DisplayProps = {
@@ -35,7 +41,18 @@ type DisplayProps = {
   onChange: (val: number) => void,
   isValid: (val: string) => boolean,
   cursor: boolean,
-  autofocus: boolean
+  autofocus: boolean,
+  /** Custom number formatter (Advanced)
+   * @param str The string to format from
+   * @param initial If the value is not in the middle of editing; this is true
+  */
+  format?: (str: string, initial?: boolean) => string,
+  /** The number of decimal places to use when using the default formatter*/
+  decimalPlaces: number,
+  /** The number of integer places to use when using the default formatter*/
+  integerPlaces: number,
+  /** The minimum decimal places to show when using the default formatter*/
+  minimumDecimalPlaces: number,
 }
 type DisplayState = {
   valid: boolean,
@@ -64,6 +81,9 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     isValid: PropTypes.func.isRequired,
     cursor: PropTypes.bool.isRequired,
     autofocus: PropTypes.bool.isRequired,
+    decimalPlaces: PropTypes.number,
+    integerPlaces: PropTypes.number,
+    minimumDecimalPlaces: PropTypes.number,
   };
 
   static defaultProps = {
@@ -81,6 +101,9 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     isValid: () => true,
     cursor: false,
     autofocus: false,
+    decimalPlaces: 2,
+    integerPlaces: 9,
+    minimumDecimalPlaces: 2
   };
 
   constructor(props: DisplayProps) {
@@ -88,8 +111,10 @@ export default class Display extends Component<DisplayProps, DisplayState> {
 
     this.blink = null;
 
-    const value = format(String(this.props.value), true);
+    const formatter = props.format ? props.format : format;
 
+    const value = formatter(String(this.props.value), true, props.integerPlaces, props.decimalPlaces, props.minimumDecimalPlaces);
+    
     this.state = {
       valid: true,
       active: false,
@@ -98,6 +123,11 @@ export default class Display extends Component<DisplayProps, DisplayState> {
       lastValue: value,
       empty: value === '0',
     };
+  }
+
+  format(str: string, initial?: boolean): string {
+    const { format: fmt = format, integerPlaces, decimalPlaces, minimumDecimalPlaces } = this.props;
+    return fmt(str, initial, integerPlaces, decimalPlaces, minimumDecimalPlaces);
   }
 
   componentDidMount() {
@@ -116,7 +146,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     if (propagate) this.context.focus(this);
     this.setState({
       active: true,
-      lastValue: format(this.state.value, true),
+      lastValue: this.format(this.state.value, true),
       value: '0',
     });
     if (this.props.cursor) {
@@ -134,7 +164,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
       this.context.blur();
     }
 
-    const value = format(this.state.value, true);
+    const value = this.format(this.state.value, true);
 
     this.setState({
       active: false,
@@ -153,7 +183,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
   };
 
   onInputEvent = (event: string) => {
-    const value = format(
+    const value = this.format(
       event === 'backspace'
         ? this.state.value.substring(0, this.state.value.length - 1)
         : `${this.state.value}${event}`

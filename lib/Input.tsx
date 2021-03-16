@@ -19,17 +19,6 @@ type InputProps = {
   onDidShow?: ()=>void,
 }
 
-type MaybeAnimated<T> = T | Animated.Value;
-type AnimatedScalar = string | number;
-type AnimatedStyles<T> = {
-  [Key in keyof T]: T[Key] extends AnimatedScalar
-    ? MaybeAnimated<T[Key]>
-    : T[Key] extends Array<infer U>
-    ? Array<AnimatedStyles<U>>
-    : AnimatedStyles<T[Key]>
-};
-
-
 export default class Input extends Component<InputProps> {
   animation: Animated.Value;
 
@@ -57,7 +46,7 @@ export default class Input extends Component<InputProps> {
     size: styles.buttonText.fontSize || 36,
   };
 
-  constructor(props) {
+  constructor(props: InputProps) {
     super(props);
 
     this.animation = new Animated.Value(0);

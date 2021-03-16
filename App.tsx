@@ -9,7 +9,7 @@ export default class App extends React.Component {
       <NumberPad>
         <SafeAreaView>
           {[0, 1, 2].map((i) => (
-            <Display key={i} cursor value={101} />
+            <Display key={i} cursor value={101}/>
           ))}
         </SafeAreaView>
         <Input
