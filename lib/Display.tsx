@@ -53,6 +53,9 @@ type DisplayProps = {
   integerPlaces: number,
   /** The minimum decimal places to show when using the default formatter*/
   minimumDecimalPlaces: number,
+
+  onFocus: () => void,
+  onBlur: () => void,
 }
 type DisplayState = {
   valid: boolean,
@@ -65,6 +68,7 @@ type DisplayState = {
 export default class Display extends Component<DisplayProps, DisplayState> {
   blink: null | ReturnType<typeof setInterval>;
   static contextType = NumberPadContext;
+  context!: React.ContextType<typeof NumberPadContext>;
 
   static propTypes = {
     value: PropTypes.number.isRequired,
@@ -84,6 +88,8 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     decimalPlaces: PropTypes.number,
     integerPlaces: PropTypes.number,
     minimumDecimalPlaces: PropTypes.number,
+    onFocus: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -103,7 +109,9 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     autofocus: false,
     decimalPlaces: 2,
     integerPlaces: 9,
-    minimumDecimalPlaces: 2
+    minimumDecimalPlaces: 2,
+    onFocus: () => { },
+    onBlur: () => { },
   };
 
   constructor(props: DisplayProps) {
@@ -144,7 +152,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
 
   focus = (propagate: any = true) => {
     if (propagate) this.context.focus(this);
-    if (!this.state.active) { 
+    if (!this.state.active) {
       // Explicitly check if was active because 
       // otherwise if tapped again while focussed, value will be reset
       this.setState({
@@ -153,6 +161,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
         value: '0',
       });
     }
+    this.props.onFocus();
     if (this.props.cursor) {
       if (this.blink) clearInterval(this.blink);
       this.blink = setInterval(() => {
@@ -169,7 +178,7 @@ export default class Display extends Component<DisplayProps, DisplayState> {
     }
 
     const value = this.format(this.state.value, true);
-
+    this.props.onBlur();
     this.setState({
       active: false,
       value: this.value(value),
