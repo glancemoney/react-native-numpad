@@ -18,7 +18,7 @@ A simple React Native number pad for quickly updating multiple number inputs.
 ## Install
 
 ```
-yarn install react-native-numpad
+yarn add react-native-numpad
 ```
 
 ## Use Cases
