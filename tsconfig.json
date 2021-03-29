@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "jsx": "react-native",
-    "target": "esnext",
-    "lib": [
-      "esnext"
-    ],
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2017", "es7", "es6", "dom"],
     "allowJs": true,
     "skipLibCheck": true,
-    "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "dist"
+  },
+  "exclude": ["node_modules", "dist"]
 }

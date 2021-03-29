@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Animated, StyleProp, ViewStyle } from 'react-native';
 
 import NumberPadContext from './NumberPadContext';
 
 type AvoidingViewProps = {
-  style: StyleProp<ViewStyle>
-}
-export default class AvoidingView extends Component<AvoidingViewProps> {
+  style: StyleProp<ViewStyle>;
+};
+
+export default class AvoidingView extends React.Component<AvoidingViewProps> {
   animation: Animated.Value;
 
   static contextType = NumberPadContext;

@@ -1,6 +1,13 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, View, Text, Animated, ViewStyle, StyleProp } from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  Animated,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 
 import NumberPadContext from './NumberPadContext';
 import styles from './styles';
@@ -8,18 +15,18 @@ import styles from './styles';
 const inputs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'];
 
 type InputProps = {
-  height: number,
-  position: 'relative'|'absolute',
-  style?: StyleProp<ViewStyle>,
-  backspaceIcon?: JSX.Element,
-  hideIcon?: JSX.Element,
-  onWillHide?: ()=>void,
-  onDidHide?: ()=>void,
-  onWillShow?: ()=>void,
-  onDidShow?: ()=>void,
-}
+  height: number;
+  position: 'relative' | 'absolute';
+  style?: StyleProp<ViewStyle>;
+  backspaceIcon?: JSX.Element;
+  hideIcon?: JSX.Element;
+  onWillHide?: () => void;
+  onDidHide?: () => void;
+  onWillShow?: () => void;
+  onDidShow?: () => void;
+};
 
-export default class Input extends Component<InputProps> {
+export default class Input extends React.Component<InputProps> {
   animation: Animated.Value;
 
   static contextType = NumberPadContext;

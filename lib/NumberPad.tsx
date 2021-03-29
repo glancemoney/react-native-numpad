@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import NumberPadContext from './NumberPadContext';
@@ -6,15 +6,18 @@ import type Display from './Display';
 import type AvoidingView from './AvoidingView';
 import type Input from './Input';
 
+type NumberPadProps = {};
 
-type NumberPadProps = {
-}
 type NumberPadState = {
-  display: null | string,
-  input: null | Input,
-  height: number
-}
-export default class NumberPad extends Component<NumberPadProps, NumberPadState> {
+  display: null | string;
+  input: null | Input;
+  height: number;
+};
+
+export default class NumberPad extends React.Component<
+  NumberPadProps,
+  NumberPadState
+> {
   displays: Record<string, Display>;
   avoidingViews: Record<string, AvoidingView>;
   static propTypes = {
