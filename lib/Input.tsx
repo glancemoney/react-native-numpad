@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {
   TouchableOpacity,
   View,
@@ -30,18 +29,6 @@ export default class Input extends React.Component<InputProps> {
   animation: Animated.Value;
 
   static contextType = NumberPadContext;
-
-  static propTypes = {
-    height: PropTypes.number,
-    position: PropTypes.oneOf(['relative', 'absolute']).isRequired,
-    style: PropTypes.object,
-    backspaceIcon: PropTypes.element,
-    hideIcon: PropTypes.element,
-    onWillHide: PropTypes.func,
-    onDidHide: PropTypes.func,
-    onWillShow: PropTypes.func,
-    onDidShow: PropTypes.func,
-  };
 
   static defaultProps = {
     height: 270,

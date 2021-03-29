@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {
   TouchableOpacity,
   View,
@@ -87,28 +86,6 @@ export default class Display extends React.Component<
   blink: null | ReturnType<typeof setInterval>;
   static contextType = NumberPadContext;
   context!: React.ContextType<typeof NumberPadContext>;
-
-  static propTypes = {
-    value: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-    textStyle: PropTypes.object.isRequired,
-    activeStyle: PropTypes.object.isRequired,
-    activeTextStyle: PropTypes.object.isRequired,
-    invalidTextStyle: PropTypes.object.isRequired,
-    placeholderTextStyle: PropTypes.object.isRequired,
-    cursorStyle: PropTypes.object.isRequired,
-    blinkOnStyle: PropTypes.object.isRequired,
-    blinkOffStyle: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    isValid: PropTypes.func.isRequired,
-    cursor: PropTypes.bool.isRequired,
-    autofocus: PropTypes.bool.isRequired,
-    decimalPlaces: PropTypes.number,
-    integerPlaces: PropTypes.number,
-    minimumDecimalPlaces: PropTypes.number,
-    onFocus: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
-  };
 
   static defaultProps = {
     value: 0.0,

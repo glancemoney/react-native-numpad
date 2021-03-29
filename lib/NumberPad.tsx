@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import NumberPadContext from './NumberPadContext';
 import type Display from './Display';
@@ -20,9 +19,6 @@ export default class NumberPad extends React.Component<
 > {
   displays: Record<string, Display>;
   avoidingViews: Record<string, AvoidingView>;
-  static propTypes = {
-    children: PropTypes.any,
-  };
 
   constructor(props: NumberPadProps) {
     super(props);
