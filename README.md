@@ -113,6 +113,10 @@ Sometimes React Native's built-in [<KeyboardAvoidingView>](https://reactnative.d
 | ----------- | ---------------------------------------------------------------------------------------------------------------- | ------- |
 | **`style`** | Any valid style object for a [`<View>`](https://reactnative.dev/docs/view) component (`Animated.View`, actually) | _None_  |
 
+## Version History (Change Log)
+
+View [here](./CHANGELOG.md).
+
 ## Contribute
 
 We welcome contributions! If you are interested in contributing, consider helping us with one of the following tasks:
